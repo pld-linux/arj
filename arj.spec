@@ -8,7 +8,7 @@ Group:		Applications/Archiving
 Source0:	http://testcase.newmail.ru/files/%{name}-%{version}.tar.gz
 # Source0-md5:	22d6dc7365f23cd56865db3f05608de9
 BuildRequires:	autoconf
-BuildRequires:  automake
+BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 
