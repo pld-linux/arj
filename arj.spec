@@ -1,13 +1,13 @@
 Summary:	ARJ archiver for Linux
 Summary(pl):	Archiwizator ARJ dla Linuksa
 Name:		arj
-Version:	3.10.18
-Release:	2
+Version:	3.10.19
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		Applications/Archiving
 Source0:	http://testcase.newmail.ru/files/%{name}-%{version}.tar.gz
-# Source0-md5:	3a2fbe6b2f5aac5e389f88074b6627df
+# Source0-md5:	d04dfdd4d37a7f20e01d92b4731d0932
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -25,7 +25,7 @@ systemy uniksopodobne. Zak³ada siê, ¿e u¿ytkownik korzystaj±cy z tego
 pakietu zna sposób funkcjonowania programu ARJ pod DOS-em.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 
 %build
 cd gnu
