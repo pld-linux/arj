@@ -2,12 +2,14 @@ Summary:	ARJ archiver for Linux
 Summary(pl):	Archiwizator ARJ dla Linuksa
 Name:		arj
 Version:	3.10b
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Archiving
 Source0:	http://testcase.newmail.ru/files/%{name}-%{version}.tar.gz
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		no_install_post_strip 1
 
 %description
 This product is an implementation of ARJ v 2.7x for DOS on UNIX and
@@ -28,7 +30,9 @@ cd gnu
 %configure
 cd ..
 %{__make} -f makefile.gnu prepare
-%{__make} -f makefile.gnu
+%{__make} -f makefile.gnu \
+	CC="%{__cc}" \
+	CFLAGS_DBG="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -44,11 +48,14 @@ install register/register $RPM_BUILD_ROOT%{_bindir}/register-arj
 
 install arjcrypt/arjcrypt.so $RPM_BUILD_ROOT%{_libdir}
 
+%{!?debug:strip -R .comment -R .note $RPM_BUILD_ROOT%{_bindir}/{arjdisp,rearj,register-arj}}
+%{!?debug:strip --strip-unneeded -R .comment -R .note $RPM_BUILD_ROOT%{_libdir}/*.so}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog doc/rev_hist.txt resource/en/arjl.txt resource/en/readme.txt resource/en/unix.txt
-%attr(0755, root, root) %{_bindir}/*
-%{_libdir}/*
+%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/*
