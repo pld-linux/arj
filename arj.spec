@@ -25,7 +25,7 @@ systemy uniksopodobne. Zak³ada siê, ¿e u¿ytkownik korzystaj±cy z tego
 pakietu zna sposób funkcjonowania programu ARJ pod DOS-em.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 
 %build
 cd gnu
