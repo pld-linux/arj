@@ -6,6 +6,7 @@ Release:	1
 License:	GPL
 Group:		Applications/Archiving
 Source0:	http://testcase.newmail.ru/files/%{name}-%{version}.tar.gz
+# Source0-md5: 077d0023f6dd5154f96a775ba98c8cdb
 BuildRequires:	autoconf
 BuildRequires:  automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
