@@ -3,6 +3,7 @@ Summary(pl):	Archiwizator ARJ dla Linuksa
 Name:		arj
 Version:	3.10.18
 Release:	1
+Epoch:		1
 License:	GPL
 Group:		Applications/Archiving
 Source0:	http://testcase.newmail.ru/files/%{name}-%{version}.tar.gz
@@ -10,7 +11,6 @@ Source0:	http://testcase.newmail.ru/files/%{name}-%{version}.tar.gz
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 
 %define		no_install_post_strip 1
 
