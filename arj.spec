@@ -30,7 +30,7 @@ pakietu zna sposób funkcjonowania programu ARJ pod DOS-em.
 %build
 cd gnu
 %{__autoconf}
-install %{_datadir}/automake/config.* .
+install /usr/share/automake/config.* .
 
 %configure
 cd ..
