@@ -7,7 +7,9 @@ License:	GPL
 Group:		Applications/Archiving
 Source0:	http://testcase.newmail.ru/files/%{name}-%{version}.tar.gz
 BuildRequires:	autoconf
+BuildRequires:  automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
 
 %define		no_install_post_strip 1
 
@@ -27,6 +29,8 @@ pakietu zna sposób funkcjonowania programu ARJ pod DOS-em.
 %build
 cd gnu
 %{__autoconf}
+install %{_datadir}/automake/config.* .
+
 %configure
 cd ..
 %{__make} \
