@@ -2,7 +2,7 @@ Summary:	ARJ archiver for Linux
 Summary(pl):	Archiwizator ARJ dla Linuksa
 Name:		arj
 Version:	3.10.19
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Applications/Archiving
