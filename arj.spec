@@ -1,19 +1,13 @@
-%define distfile ARJL_310
 Summary:	ARJ archiver for Linux
 Summary(pl):	Archiwizator ARJ dla Linuksa
 Name:		arj
-Version:	3.10
+Version:	3.10b
 Release:	1
-License:	Shareware, distributable
-Vendor:		ARJ Software Russia
+License:	GPL
 Group:		Applications/Archiving
-# The original URL is outdated:	ftp://ftp.black.ru/fileecho/AUTLCOMP/%{distfile}
-Source0:	%distfile
-ExclusiveOS:	Linux
-ExclusiveArch:	%{ix86}
+Source0:	http://testcase.newmail.ru/files/%{name}-%{version}.tar.gz
+BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define no_install_post_strip 1
 
 %description
 This product is an implementation of ARJ v 2.7x for DOS on UNIX and
@@ -26,29 +20,35 @@ systemy uniksopodobne. Zak³ada siê, ¿e u¿ytkownik korzystaj±cy z tego
 pakietu zna sposób funkcjonowania programu ARJ pod DOS-em.
 
 %prep
-%setup -q -T -c
-install %{SOURCE0} .
-chmod 755 %{distfile}
-./%{distfile} << EOF
-y
-n
+%setup -q
 
-y
-y
-EOF
-bin/arj | head -4 > doc/arj/LICENSE
+%build
+cd gnu
+%{__autoconf}
+%configure
+cd ..
+%{__make} -f makefile.gnu prepare
+%{__make} -f makefile.gnu
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_bindir}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}}
 
-mv -f bin/register bin/register-arj
-install bin/* $RPM_BUILD_ROOT%{_bindir}
+cd linux-gnu/en/rs
+install \
+	arj/arj \
+	arjdisp/arjdisp \
+	rearj/rearj \
+	$RPM_BUILD_ROOT%{_bindir}
+install register/register $RPM_BUILD_ROOT%{_bindir}/register-arj
+
+install arjcrypt/arjcrypt.so $RPM_BUILD_ROOT%{_libdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc doc/arj/*
+%doc ChangeLog doc/rev_hist.txt resource/en/arjl.txt resource/en/readme.txt resource/en/unix.txt
 %attr(0755, root, root) %{_bindir}/*
+%{_libdir}/*
