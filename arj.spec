@@ -1,44 +1,55 @@
 %define distfile ARJL_310
 
-Summary: ARJ for Linux
-Name: arj
-Version: 3.10
-Release: 0.1
-Copyright: shareware
-Vendor: ARJ Software Russia
-ExclusiveOS: Linux
-ExclusiveArch: i386
-Group: Applications/Archiving
-Source: ftp://ftp.black.ru/fileecho/AUTLCOMP/%{distfile}
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+Summary:	ARJ archiver for Linux
+Summary(pl):	Archiwizator ARJ dla Linuksa
+Name:		arj
+Version:	3.10
+Release:	1
+Copyright:	Shareware, distributable
+Vendor:		ARJ Software Russia
+ExclusiveOS:	Linux
+ExclusiveArch:	%{ix86}
+Group:		Applications/Archiving
+# The original URL is outdated:	ftp://ftp.black.ru/fileecho/AUTLCOMP/%{distfile}
+Source0:	%distfile
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define no_install_post_strip 1
 
 %description
 This product is an implementation of ARJ v 2.7x for DOS on UNIX and
 UNIX-like systems. It is assumed that the user is familiar with ARJ
 operation on DOS before using this package.
 
+%description -l pl
+Jest to implementacja programu ARJ v 2.7x dla DOS na platformê UNIX i
+systemy uniksopodobne. Zak³ada siê, ¿e u¿ytkownik korzystaj±cy z tego
+pakietu zna sposób funkcjonowania programu ARJ pod DOSem.
+
 
 %prep
-%setup -T -c
-chmod 755 ${RPM_SOURCE_DIR}/%{distfile}
-${RPM_SOURCE_DIR}/%{distfile} << EOF
+%setup -q -T -c
+install %{SOURCE0} .
+chmod 755 %{distfile}
+./%{distfile} << EOF
 y
 n
 
 y
 y
 EOF
+bin/arj | head -4 > doc/arj/LICENSE
 
 %install
-rm -rf ${RPM_BUILD_ROOT}
-mkdir -p ${RPM_BUILD_ROOT}%{_bindir}
+rm -rf $RPM_BUILD_ROOT
+install -d ${RPM_BUILD_ROOT}%{_bindir}
 mv bin/register bin/register-arj
-install -m 644 bin/* ${RPM_BUILD_ROOT}%{_bindir}
+install bin/* ${RPM_BUILD_ROOT}%{_bindir}
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
 
 %files
-%defattr(0644, root, root, 0755)
+%defattr(644,root,root,755)
 %doc doc/arj/*
 %attr(0755, root, root) %{_bindir}/*
