@@ -34,7 +34,7 @@ install /usr/share/automake/config.* .
 
 %configure
 cd ..
-%{__make} \
+%{__make} -j1 \
 	CC="%{__cc}" \
 	CFLAGS_DBG="%{rpmcflags}"
 
