@@ -1,5 +1,5 @@
 Summary:	ARJ archiver for Linux
-Summary(pl):	Archiwizator ARJ dla Linuksa
+Summary(pl.UTF-8):   Archiwizator ARJ dla Linuksa
 Name:		arj
 Version:	3.10.22
 Release:	1
@@ -19,10 +19,10 @@ This product is an implementation of ARJ v 2.7x for DOS on UNIX and
 UNIX-like systems. It is assumed that the user is familiar with ARJ
 operation on DOS before using this package.
 
-%description -l pl
-Jest to implementacja programu ARJ v 2.7x dla DOS na platformê UNIX i
-systemy uniksopodobne. Zak³ada siê, ¿e u¿ytkownik korzystaj±cy z tego
-pakietu zna sposób funkcjonowania programu ARJ pod DOS-em.
+%description -l pl.UTF-8
+Jest to implementacja programu ARJ v 2.7x dla DOS na platformÄ™ UNIX i
+systemy uniksopodobne. ZakÅ‚ada siÄ™, Å¼e uÅ¼ytkownik korzystajÄ…cy z tego
+pakietu zna sposÃ³b funkcjonowania programu ARJ pod DOS-em.
 
 %prep
 %setup -q
