@@ -1,5 +1,5 @@
 Summary:	ARJ archiver for Linux
-Summary(pl.UTF-8):   Archiwizator ARJ dla Linuksa
+Summary(pl.UTF-8):	Archiwizator ARJ dla Linuksa
 Name:		arj
 Version:	3.10.22
 Release:	1
