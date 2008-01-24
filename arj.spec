@@ -12,6 +12,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# main executable cannot be stripped (doesn't work then)
 %define		no_install_post_strip 1
 
 %description
