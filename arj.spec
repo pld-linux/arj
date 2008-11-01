@@ -2,7 +2,7 @@ Summary:	ARJ archiver for Linux
 Summary(pl.UTF-8):	Archiwizator ARJ dla Linuksa
 Name:		arj
 Version:	3.10.22
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Applications/Archiving
@@ -14,6 +14,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # main executable cannot be stripped (doesn't work then)
 %define		no_install_post_strip 1
+%define		specflags	-fno-unit-at-a-time
 
 %description
 This product is an implementation of ARJ v 2.7x for DOS on UNIX and
@@ -36,8 +37,7 @@ install /usr/share/automake/config.* .
 %configure
 cd ..
 %{__make} -j1 \
-	CC="%{__cc}" \
-	CFLAGS_DBG="%{rpmcflags}"
+	CC="%{__cc}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
