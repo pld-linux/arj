@@ -1,0 +1,198 @@
+diff -urN arj-3.10.22/arj_arcv.c arj-3.10.22.ne/arj_arcv.c
+--- arj-3.10.22/arj_arcv.c	2005-06-21 21:53:12.000000000 +0200
++++ arj-3.10.22.ne/arj_arcv.c	2013-01-30 16:34:20.288567626 +0100
+@@ -3652,7 +3652,7 @@
+  {
+   if(msg_fprintf(idxstream, M_TESTING, archive_name)<0)
+    error(M_DISK_FULL);
+-  if(fprintf(idxstream, lf)<0)
++  if(fprintf(idxstream, "%s", lf)<0)
+    error(M_DISK_FULL);
+  }
+  cmd_verb=ARJ_CMD_TEST;
+diff -urN arj-3.10.22/arjdisp.c arj-3.10.22.ne/arjdisp.c
+--- arj-3.10.22/arjdisp.c	2003-06-22 13:12:28.000000000 +0200
++++ arj-3.10.22.ne/arjdisp.c	2013-01-30 16:54:51.568563877 +0100
+@@ -54,19 +54,19 @@
+  textcolor(7);
+  clrscr();
+  gotoxy(2, 2);
+- scrprintf(win_top);
++ scrprintf("%s", win_top);
+  for(i=3; i<24; i++)
+  {
+-  gotoxy(2, i); scrprintf(win_border);
+-  gotoxy(79, i); scrprintf(win_border);
++  gotoxy(2, i); scrprintf("%s", win_border);
++  gotoxy(79, i); scrprintf("%s", win_border);
+  }
+- gotoxy(2, 24); scrprintf(win_bottom);
++ gotoxy(2, 24); scrprintf("%s", win_bottom);
+  gotoxy(10, 5);
+- scrprintf(M_ARJDISP_COPYRIGHT);
++ scrprintf("%s", M_ARJDISP_COPYRIGHT);
+  gotoxy(10, 6);
+- scrprintf(M_ARJDISP_DISTRIBUTION);
++ scrprintf("%s", M_ARJDISP_DISTRIBUTION);
+  gotoxy(10, 7);
+- scrprintf(M_ARJDISP_LICENSE);
++ scrprintf("%s", M_ARJDISP_LICENSE);
+  gotoxy(16, 10);
+  scrprintf(M_PROCESSING_ARCHIVE, archive_name);
+  t=strtok(M_ARJDISP_INFO, msg_lf);
+@@ -78,7 +78,7 @@
+   t=strtok(NULL, msg_lf);
+  }
+  gotoxy(16, 20);
+- scrprintf(M_PRESS_ANY_KEY);
++ scrprintf("%s", M_PRESS_ANY_KEY);
+  uni_getch();
+  gotoxy(1, 24);
+ }
+@@ -96,19 +96,19 @@
+  {
+   clrscr();
+   gotoxy(2, 2);
+-  scrprintf(win_top);
++  scrprintf("%s", win_top);
+   for(i=3; i<24; i++)
+   {
+-   gotoxy(2, i); scrprintf(win_border);
+-   gotoxy(79, i); scrprintf(win_border);
++   gotoxy(2, i); scrprintf("%s", win_border);
++   gotoxy(79, i); scrprintf("%s", win_border);
+   }
+-  gotoxy(2, 24); scrprintf(win_bottom);
++  gotoxy(2, 24); scrprintf("%s", win_bottom);
+   gotoxy(10, 5);
+-  scrprintf(M_ARJDISP_COPYRIGHT);
++  scrprintf("%s", M_ARJDISP_COPYRIGHT);
+   gotoxy(10, 6);
+-  scrprintf(M_ARJDISP_DISTRIBUTION);
++  scrprintf("%s", M_ARJDISP_DISTRIBUTION);
+   gotoxy(10, 7);
+-  scrprintf(M_ARJDISP_LICENSE);
++  scrprintf("%s", M_ARJDISP_LICENSE);
+   gotoxy(16, 10);
+   scrprintf(M_PROCESSING_ARCHIVE, archive_name);
+   gotoxy(16, 12);
+@@ -132,13 +132,13 @@
+     break;
+   }
+   gotoxy(15, 14);
+-  scrprintf(ind_top);
++  scrprintf("%s", ind_top);
+   gotoxy(15, 15);
+-  scrprintf(ind_middle);
++  scrprintf("%s", ind_middle);
+   gotoxy(15, 16);
+-  scrprintf(ind_bottom);
++  scrprintf("%s", ind_bottom);
+   gotoxy(16, 18);
+-  scrprintf(M_ARJDISP_CTR_START);
++  scrprintf("%s", M_ARJDISP_CTR_START);
+  }
+  else
+  {
+@@ -146,7 +146,7 @@
+   gotoxy(16, 15);
+   memset(progress, indo, i);
+   progress[i]='\0';
+-  scrprintf(progress);
++  scrprintf("%s", progress);
+   gotoxy(16, 18);
+   scrprintf(M_ARJDISP_CTR, calc_percentage(bytes, uncompsize)/10);
+  }
+@@ -165,19 +165,19 @@
+  textcolor(7);
+  clrscr();
+  gotoxy(2, 2);
+- scrprintf(win_top);
++ scrprintf("%s", win_top);
+  for(i=3; i<24; i++)
+  {
+-  gotoxy(2, i); scrprintf(win_border);
+-  gotoxy(79, i); scrprintf(win_border);
++  gotoxy(2, i); scrprintf("%s", win_border);
++  gotoxy(79, i); scrprintf("%s", win_border);
+  }
+- gotoxy(2, 24); scrprintf(win_bottom);
++ gotoxy(2, 24); scrprintf("%s", win_bottom);
+  gotoxy(10, 5);
+- scrprintf(M_ARJDISP_COPYRIGHT);
++ scrprintf("%s", M_ARJDISP_COPYRIGHT);
+  gotoxy(10, 6);
+- scrprintf(M_ARJDISP_DISTRIBUTION);
++ scrprintf("%s", M_ARJDISP_DISTRIBUTION);
+  gotoxy(10, 7);
+- scrprintf(M_ARJDISP_LICENSE);
++ scrprintf("%s", M_ARJDISP_LICENSE);
+  gotoxy(16, 10);
+  scrprintf(M_FINISHED_PROCESSING, archive_name);
+  gotoxy(1, 24);
+diff -urN arj-3.10.22/arjsfx.c arj-3.10.22.ne/arjsfx.c
+--- arj-3.10.22/arjsfx.c	2005-06-21 21:53:14.000000000 +0200
++++ arj-3.10.22.ne/arjsfx.c	2013-01-30 16:38:12.380643609 +0100
+@@ -214,7 +214,7 @@
+   freopen(dev_con, m_w, stdout);
+  #if SFX_LEVEL>=ARJSFXV
+   if(ferror(stdout))
+-   msg_fprintf(stderr, M_DISK_FULL);
++   msg_fprintf(stderr, "%s", M_DISK_FULL);
+   if(debug_enabled&&strchr(debug_opt, 't')!=NULL)
+   {
+    ticks=get_ticks()-ticks;
+diff -urN arj-3.10.22/arj_user.c arj-3.10.22.ne/arj_user.c
+--- arj-3.10.22/arj_user.c	2004-06-18 18:19:36.000000000 +0200
++++ arj-3.10.22.ne/arj_user.c	2013-01-30 16:42:56.832435935 +0100
+@@ -1059,7 +1059,7 @@
+      if(recover_file(tmp_archive_name, nullstr, tmp_tmp_filename, protected, eof_pos))
+      {
+       msg_cprintf(H_HL, M_CANT_FIND_DAMAGE, archive_name);
+-      printf(lf);
++      fputs(lf, stdout);
+      }
+      else
+      {
+@@ -1294,7 +1294,7 @@
+    if(recover_file(archive_name, nullstr, nullstr, protected, eof_pos))
+    {
+     msg_cprintf(H_HL, M_CANT_FIND_DAMAGE, archive_name);
+-    printf(lf);
++    fputs(lf, stdout);
+    }
+    else
+    {
+@@ -2303,7 +2303,7 @@
+   timestamp_to_str(timetext, &ftime_stamp);
+   msg_cprintf(H_HL|H_NFMT, M_ARCHIVE_CREATED, timetext);
+   if(show_ansi_comments)
+-   printf(cmt_ptr);
++   fputs(cmt_ptr, stdout);
+   else
+    display_comment(cmt_ptr);
+   /* The sfx_setup() occurs here */
+diff -urN arj-3.10.22/rearj.c arj-3.10.22.ne/rearj.c
+--- arj-3.10.22/rearj.c	2005-06-21 21:53:14.000000000 +0200
++++ arj-3.10.22.ne/rearj.c	2013-01-30 16:44:17.368666299 +0100
+@@ -935,7 +935,7 @@
+  msg_cprintf(H_HL|H_NFMT, M_OLD_SIZE, old_fsize);
+  msg_cprintf(H_HL|H_NFMT, M_NEW_SIZE, new_fsize);
+  msg_cprintf(H_HL|H_NFMT, M_SAVINGS_SIZE, gain);
+- printf(lf);
++ fputs(lf, stdout);
+  total_old_fsize+=old_fsize;
+  total_new_fsize+=new_fsize;
+  total_files++;
+diff -urN arj-3.10.22/register.c arj-3.10.22.ne/register.c
+--- arj-3.10.22/register.c	2004-04-21 09:04:10.000000000 +0200
++++ arj-3.10.22.ne/register.c	2013-01-30 16:46:12.208044161 +0100
+@@ -205,7 +205,7 @@
+  char reg_source[200];
+  int i;
+ 
+- printf(M_REGISTER_BANNER);
++ fputs(M_REGISTER_BANNER, stdout);
+  integrity_pattern[0]--;
+  build_crc32_table();
+  if(argc!=2)

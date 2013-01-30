@@ -10,6 +10,7 @@ Source0:	http://testcase.newmail.ru/files/%{name}-%{version}.tar.gz
 # Source0-md5:	f263bf3cf6d42a8b7e85b4fb514336d3
 Patch0:		strnlen.patch
 Patch1:		%{name}-glibc.patch
+Patch2:		%{name}-format-security.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -32,6 +33,7 @@ pakietu zna sposób funkcjonowania programu ARJ pod DOS-em.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 cd gnu
