@@ -2,7 +2,7 @@ Summary:	ARJ archiver for Linux
 Summary(pl.UTF-8):	Archiwizator ARJ dla Linuksa
 Name:		arj
 Version:	3.10.22
-Release:	8
+Release:	9
 Epoch:		1
 License:	GPL
 Group:		Applications/Archiving
@@ -55,7 +55,7 @@ cd ..
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir}}
 
-cd linux-gnu/en/rs
+cd linux%{_gnu}/en/rs
 install \
 	arj/arj \
 	arjdisp/arjdisp \
@@ -64,9 +64,6 @@ install \
 install register/arj-register $RPM_BUILD_ROOT%{_bindir}/arj-register
 
 install arjcrypt/arjcrypt.so $RPM_BUILD_ROOT%{_libdir}
-
-%{!?debug:strip -R .comment -R .note $RPM_BUILD_ROOT%{_bindir}/{arjdisp,rearj,arj-register}}
-%{!?debug:strip --strip-unneeded -R .comment -R .note $RPM_BUILD_ROOT%{_libdir}/*.so}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
