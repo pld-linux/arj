@@ -1,0 +1,11 @@
+--- arj-3.10.22/gnu/makefile.in~	2004-04-17 13:28:06.000000000 +0200
++++ arj-3.10.22/gnu/makefile.in	2026-02-22 14:55:48.016669418 +0100
+@@ -53,7 +53,7 @@
+ ALL_CFLAGS += -g -DDEBUG
+ else
+ DEBUG_SM = r
+-ADD_LDFLAGS = -s @LD_STRIP@
++ADD_LDFLAGS = 
+ endif
+ 
+ ALL_CFLAGS += $(CFLAGS)

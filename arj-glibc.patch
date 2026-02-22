@@ -2,8 +2,7 @@ diff -ruN arj-3.10.22.orig/fardata.c arj-3.10.22/fardata.c
 --- arj-3.10.22.orig/fardata.c	2004-04-17 04:39:42.000000000 -0700
 +++ arj-3.10.22/fardata.c	2009-05-27 19:21:42.000000000 -0700
 @@ -13,7 +13,7 @@
- /* ASR fix 02/05/2003: need that regardless of COLOR_OUTPUT to
- * support -jp
+ /* ASR fix 02/05/2003: need that regardless of COLOR_OUTPUT to support -jp
     correctly */
  #if SFX_LEVEL>=ARJ
 - #define CUSTOM_PRINTF
@@ -11,3 +10,13 @@ diff -ruN arj-3.10.22.orig/fardata.c arj-3.10.22/fardata.c
   #define CHUNK_SIZE               512    /* Size of the output block */
   #define CHUNK_THRESHOLD (CHUNK_SIZE-256) /* Safety bound */
  #endif
+--- arj-3.10.22/environ.c~	2004-06-18 18:19:36.000000000 +0200
++++ arj-3.10.22/environ.c	2026-02-22 14:52:54.823336141 +0100
+@@ -58,6 +58,7 @@
+   #include <sys/ioctl.h>
+   #include <sys/statfs.h>
+   #include <sys/statvfs.h>
++  #include <sys/wait.h>
+  #elif defined(__FreeBSD__)||defined(__NetBSD__)
+   #include <sys/param.h>
+   #include <sys/mount.h>
