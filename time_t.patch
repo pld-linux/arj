@@ -1,0 +1,55 @@
+--- arj-3.10.22/arjtypes.c.orig	2005-06-23 12:00:54.000000000 +0200
++++ arj-3.10.22/arjtypes.c	2026-02-22 15:23:34.550002556 +0100
+@@ -135,11 +135,11 @@
+ 
+ /* Converts a UNIX timestamp to the DOS style */
+ 
+-static unsigned long ts_unix2dos(const long ts)
++static unsigned long ts_unix2dos(const time_t ts)
+ {
+  struct tm *stm;
+ 
+- stm=arj_localtime((time_t*)&ts);
++ stm=arj_localtime(&ts);
+  return(get_tstamp(stm->tm_year+1900, stm->tm_mon+1, stm->tm_mday,
+         stm->tm_hour, stm->tm_min, stm->tm_sec));
+ }
+@@ -148,13 +148,13 @@
+ 
+ static unsigned long mk_unixtime(int y, int m, int d, int hh, int mm, int ss)
+ {
+- unsigned long u=0, ts;
++ unsigned long u=0;
+  unsigned int i, v;
+  /* Clash with NetBSD/x86-64 patch: leaving rc as unsigned long still permits
+     to escape the year 2038 problem in favor of year 2106 problem, while a
+     dedicated time_t structure can be expected as a 64-bit value on relevant
+     platforms -- ASR fix 25/01/2004 */
+- unsigned long rc;
++ time_t rc, ts;
+  time_t tt;
+  long tzshift, shiftd1, shiftd2;
+  struct tm *stm;
+@@ -191,7 +191,7 @@
+    u+=isleapyear(y);
+  }
+  rc=86400*(unsigned long)(u+d-1)+(unsigned long)hh*3600+(unsigned long)mm*60+(unsigned long)ss;
+- stm=arj_localtime((const long *)&rc);
++ stm=arj_localtime(&rc);
+  debug_assert(stm!=NULL);               /* LIBCS.DLL returns NULL for unixtime beyond
+                                            0x7FFFFFFF */
+  tzshift=(long)stm->tm_hour*3600+(long)stm->tm_min*60;
+@@ -199,11 +199,11 @@
+  ts=rc;
+  #ifdef LOCALTIME_WORKAROUND
+   v=fold_timestamp(&ts);
+-  stm=gmtime((const long *)&ts);
++  stm=gmtime(&ts);
+   debug_assert(stm!=NULL);
+   stm->tm_year+=v;
+  #else
+-  stm=gmtime((const long *)&ts);  
++  stm=gmtime(&ts);
+  #endif
+  shiftd2=stm->tm_mday;
+  /* Local time overruns GMT, add 24 hours for safety */

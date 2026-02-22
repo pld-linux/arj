@@ -2,7 +2,7 @@ Summary:	ARJ archiver for Linux
 Summary(pl.UTF-8):	Archiwizator ARJ dla Linuksa
 Name:		arj
 Version:	3.10.22
-Release:	7
+Release:	8
 Epoch:		1
 License:	GPL
 Group:		Applications/Archiving
@@ -13,6 +13,7 @@ Patch0:		strnlen.patch
 Patch1:		%{name}-glibc.patch
 Patch2:		%{name}-format-security.patch
 Patch3:		no-strip.patch
+Patch4:		time_t.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -37,6 +38,7 @@ pakietu zna sposób funkcjonowania programu ARJ pod DOS-em.
 %patch -P1 -p1
 %patch -P2 -p1
 %patch -P3 -p1
+%patch -P4 -p1
 
 %build
 cd gnu
